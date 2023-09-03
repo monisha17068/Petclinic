@@ -1,0 +1,33 @@
+pipeline {
+  agent any
+  
+  tools{
+        jdk 'jdk11'
+        maven 'maven3'
+        }
+  
+  stages {
+    stage('Git Checkout') {
+      steps {
+        // Git checkout
+       git branch: 'feature1', credentialsId: 'e730b61a-efb8-4ace-a089-cabe9cc5ef49', url: 'https://github.com/monisha17068/Petclinic.git'
+      }
+    }
+    
+    stage('Maven Compile') {
+      steps {
+        // Maven compile
+        sh 'mvn compile'
+      }
+    }
+    
+    stage('Maven Package') {
+      steps {
+        // Maven package
+        sh 'mvn package'
+      }
+    }
+    
+    
+  }
+}
